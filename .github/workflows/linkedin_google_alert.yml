@@ -19,8 +19,8 @@ jobs:
           python-version: '3.10'
 
       - name: Instalar dependências
-        run: |
-          pip install -r requisitos.txt
+  run: |
+    pip install -r requirements.txt
 
       - name: Rodar linkedin_bot_v2.py
         run: |
