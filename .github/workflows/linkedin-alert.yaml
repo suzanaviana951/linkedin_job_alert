@@ -22,6 +22,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Rodar o bot
-        run: |
-          python main.py
+      - name: Rodar o bot v2
+  run: |
+    python linkedin_bot_v2.py
