@@ -24,4 +24,4 @@ jobs:
 
       - name: Executar script
         run: |
-          python linkedin_job_alert/main.py
+          python main.py
