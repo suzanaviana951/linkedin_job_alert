@@ -1,12 +1,12 @@
-name: Alerta de vagas LinkedIn
+name: Bot LinkedIn a cada 1 hora
 
 on:
   schedule:
-    - cron: '0 * * * *'  # A cada 1 hora
+    - cron: '0 * * * *'  # roda todo início de hora
   workflow_dispatch:
 
 jobs:
-  linkedin-bot:
+  rodar-bot:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +22,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Executar script
+      - name: Rodar o bot
         run: |
           python main.py
