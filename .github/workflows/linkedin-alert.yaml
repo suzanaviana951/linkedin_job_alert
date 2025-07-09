@@ -20,7 +20,7 @@ jobs:
 
       - name: Instalar dependências
         run: |
-          pip install -r linkedin_job_alert/requirements.txt
+          pip install -r requirements.txt
 
       - name: Executar script
         run: |
