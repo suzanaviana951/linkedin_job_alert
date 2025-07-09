@@ -72,3 +72,5 @@ def rodar_bot():
 
 if __name__ == "__main__":
     rodar_bot()
+[✔] Commit changes directly to the main branch
+[Commit changes]
