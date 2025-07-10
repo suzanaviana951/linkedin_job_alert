@@ -1,0 +1,26 @@
+name: LinkedIn Bot - Analista de Logística
+
+on:
+  schedule:
+    - cron: '0 */1 * * *'  # Executa a cada 1 hora
+  workflow_dispatch:
+
+jobs:
+  run-linkedin-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+
+      - name: Rodar linkedin_bot_v2.py com filtro "Analista de Logística"
+        run: |
+          python linkedin_bot_v2.py "https://www.linkedin.com/jobs/search/?currentJobId=4264608623&f_E=4&f_PP=104746682%2C102043228%2C103501557%2C105742718%2C105159580%2C104730895%2C103451405%2C105132905%2C105900002%2C102620040&f_T=1657%2C2055%2C8787%2C6511%2C504%2C12%2C113%2C5046&f_TPR=r604800&keywords=Analista%20de%20Logistica&origin=JOB_SEARCH_PAGE_JOB_FILTER&sortBy=DD&spellCorrectionEnabled=true"
