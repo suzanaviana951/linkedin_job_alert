@@ -32,8 +32,12 @@ ARQUIVO_HISTORICO = "vagas_enviadas.json"
 
 def carregar_historico():
     if os.path.exists(ARQUIVO_HISTORICO):
-        with open(ARQUIVO_HISTORICO, "r") as f:
-            return json.load(f)
+        try:
+            with open(ARQUIVO_HISTORICO, "r") as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            print("⚠️ Histórico corrompido. Reiniciando...")
+            return []
     return []
 
 def salvar_historico(vagas):
