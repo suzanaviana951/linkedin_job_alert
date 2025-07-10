@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # CONFIGURAÇÕES DO TELEGRAM
 BOT_TOKEN = "8002177542:AAGgQ3_QzbC2JMalg1QQtsw18h_sRKuu8RI"
@@ -32,12 +32,11 @@ ARQUIVO_HISTORICO = "vagas_enviadas.json"
 
 def carregar_historico():
     if os.path.exists(ARQUIVO_HISTORICO):
-        try:
-            with open(ARQUIVO_HISTORICO, "r") as f:
+        with open(ARQUIVO_HISTORICO, "r") as f:
+            try:
                 return json.load(f)
-        except json.JSONDecodeError:
-            print("⚠️ Histórico corrompido. Reiniciando...")
-            return []
+            except json.JSONDecodeError:
+                return []
     return []
 
 def salvar_historico(vagas):
@@ -67,7 +66,9 @@ def rodar_bot():
         mensagem = "🔍 *Novas buscas LinkedIn detectadas!*\n\n"
         for cargo, url in novas_vagas:
             mensagem += f"🔹 *{cargo}*\n[Ver vagas no LinkedIn]({url})\n\n"
-        mensagem += f"_Varredura realizada às {datetime.now().strftime('%H:%M:%S - %d/%m/%Y')}_"
+
+        horario_brasilia = datetime.utcnow() - timedelta(hours=3)
+        mensagem += f"_Varredura realizada às {horario_brasilia.strftime('%H:%M:%S - %d/%m/%Y')}_"
 
         enviar_telegram(mensagem)
         salvar_historico(historico)
@@ -76,3 +77,4 @@ def rodar_bot():
 
 if __name__ == "__main__":
     rodar_bot()
+
