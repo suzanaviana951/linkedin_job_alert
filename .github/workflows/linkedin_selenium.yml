@@ -1,12 +1,12 @@
-name: Alerta LinkedIn com Selenium
+name: LinkedIn Bot - Selenium
 
 on:
   schedule:
-    - cron: '0 * * * *'  # roda a cada 1 hora
+    - cron: '0 */1 * * *'  # Executa a cada 1 hora
   workflow_dispatch:
 
 jobs:
-  rodar-selenium:
+  run-bot:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,12 +21,16 @@ jobs:
       - name: Instalar dependências
         run: |
           pip install -r requirements.txt
+
+      - name: Instalar Chromium e Chromedriver
+        run: |
           sudo apt update
           sudo apt install -y chromium-browser chromium-chromedriver
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
-      - name: Executar bot com Selenium
-        env:
-          DISPLAY: :99
+      - name: Vincular chromedriver
+        run: |
+          sudo ln -s /snap/bin/chromium.chromedriver /usr/bin/chromedriver || true
+
+      - name: Rodar linkedin_bot_selenium.py
         run: |
           python linkedin_bot_selenium.py
